@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!-- Fake students; same structure as SIU-Guaraní 3 autogestión (from guarani-chrome's sample pages). -->
+<html><head><meta charset="utf-8"><title>Carga de notas</title></head><body>
+<div id="cabecera"><h2 class="clearfix"><span class="pull-left">Carga de notas de cursada</span></h2></div>
+<div id="js-colapsar-detalles-zona"><div><span>Biología (CBC)</span></div></div>
+<div id="renglones" class="pagelet"><form class="form-renglones" action="#" method="post">
+<div class="botonera"><input type="submit" id="js-btn-guardar" value="Guardar" disabled></div>
+<table class="table"><thead><tr><th>Alumno</th><th>% Asist.</th><th>Acta</th><th>Fecha</th><th>Nota</th><th>Resultado</th><th>Condición</th><th>Observaciones</th></tr></thead><tbody>
+<tr id="renglon_2001" class="js-renglon-regular  js--P" data-renglon="2001"><td class="info-alumno"><div class="ficha-alumno clearfix pull-left"><img class="pull-left foto-alumno"><div class="pull-left datos-alumno"><span class="nombre">Pérez, Ana</span><span class="identificacion" title="DNI 40335123">DNI 40335123</span></div></div></td><td class="centrar alinear col-asistencia">-</td><td class="centrar alinear col-nro-acta">Cursada ( 6135 )</td><td class="centrar alinear col-fecha"><input type="text" data-tipo="fecha" name="renglones[2001][fecha_regular]" value="" class="fecha nav hasDatepicker"></td><td class="centrar alinear col-nota_cursada"><select class="nota_cursada" data-tipo="nota" name="renglones[2001][nota_cursada]"><option value="" data-resultado="vacio">-</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></td><td class="centrar alinear col-resultado"><select class="resultado" data-tipo="resultado" name="renglones[2001][resultado_cursada]"><option value="" data-resultado="vacio">-</option><option value="U">Ausente</option><option value="R">Reprobado</option><option value="A">Aprobado</option></select></td><td class="centrar alinear col-condicion"><select class="condicion" data-tipo="cond_regularidad" name="renglones[2001][cond_regularidad]"><option value="" data-resultado="vacio">-</option><option data-resultado="A" value="10">
+						Regular
+					</option><option data-resultado="U" value="11">
+						Libre
+					</option><option data-resultado="R" value="12">
+						Insuficiente
+					</option><option data-resultado="A" value="13">
+						Promocionó
+					</option><option data-resultado="U" value="14">
+						Abandonó
+					</option></select></td><td class="centrar alinear col-observacion"><input type="text" data-tipo="observacion" name="renglones[2001][observacion_cursada]" value="" class="observacion"></td></tr>
+</tbody></table></form></div></body></html>

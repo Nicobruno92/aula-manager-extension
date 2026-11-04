@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Aula Manager: pasar notas</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="bienvenida.css">
+</head>
+<body>
+  <h1>Antes de usar la extensión</h1>
+  <p>Esta extensión completa la carga de notas de SIU-Guaraní con las notas que vos mandás desde Aula Manager. Esto es lo que hace con esos datos:</p>
+  <ul>
+    <li><strong>Qué recibe:</strong> el DNI de cada alumno y los datos del acta (fecha, nota, resultado y condición). Ningún nombre.</li>
+    <li><strong>De dónde:</strong> solo de aula-manager.com, cuando tocás «Mandar a la extensión».</li>
+    <li><strong>Dónde quedan:</strong> en la memoria de este navegador, nunca en el disco. Se borran a las dos horas, al cerrar Chrome o con «Borrar las notas guardadas».</li>
+    <li><strong>Para qué:</strong> solo para completar el formulario de la página de carga de notas que vos abrís, cuando tocás «Usar en esta página». Vos revisás y guardás.</li>
+    <li><strong>A quién se mandan:</strong> a nadie. La extensión no se conecta a ningún servidor y no comparte, vende ni usa estos datos para otra cosa.</li>
+  </ul>
+  <p>El uso de los datos cumple la <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use" target="_blank" rel="noopener">política de uso limitado</a> de la Chrome Web Store. El código es público: <a href="https://github.com/Nicobruno92/aula-manager-extension" target="_blank" rel="noopener">github.com/Nicobruno92/aula-manager-extension</a>.</p>
+  <button id="aceptar">Entiendo y acepto</button>
+  <p id="estado" role="status"></p>
+  <script src="bienvenida.js"></script>
+</body>
+</html>

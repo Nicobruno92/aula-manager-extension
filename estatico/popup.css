@@ -1,0 +1,7 @@
+:root { color-scheme: light dark; --verde: #2f6b4f; }
+body { width: 300px; margin: 0; padding: 14px; font: 14px/1.4 system-ui, sans-serif; }
+h1 { font-size: 16px; margin: 0 0 8px; }
+button { display: block; width: 100%; margin: 8px 0; padding: 8px; border: 0; border-radius: 8px; background: var(--verde); color: #fff; font: inherit; cursor: pointer; }
+button.secundario { background: transparent; color: var(--verde); border: 1.5px solid var(--verde); }
+button:disabled { opacity: .5; cursor: default; }
+.nota { font-size: 12px; opacity: .75; }

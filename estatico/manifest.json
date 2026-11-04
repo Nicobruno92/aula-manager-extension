@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Aula Manager: pasar notas",
+  "version": "0.1.0",
+  "description": "Completa la carga de notas de SIU-Guaraní con las notas de Aula Manager. Vos revisás y guardás.",
+  "homepage_url": "https://github.com/Nicobruno92/aula-manager-extension",
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "scripting",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "fondo.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Pasar notas de Aula Manager"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://aula-manager.com/*"
+      ],
+      "js": [
+        "puente.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

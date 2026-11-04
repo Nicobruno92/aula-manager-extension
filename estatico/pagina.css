@@ -1,0 +1,12 @@
+/* Panel and row marks injected into the platform's page. Every class starts with am- so none collides with the platform's. */
+.am-panel { margin: 10px 0; padding: 12px 14px; border: 2px solid #2f6b4f; border-radius: 10px; background: #f4faf6; color: #1c2b24; font: 14px/1.4 system-ui, sans-serif; }
+.am-panel p { margin: 6px 0; }
+.am-panel ul { margin: 6px 0; padding-left: 18px; }
+.am-panel label { display: block; margin: 6px 0; }
+.am-boton { padding: 6px 14px; border: 0; border-radius: 8px; background: #2f6b4f; color: #fff; font: inherit; cursor: pointer; }
+.am-aviso { font-size: 12px; opacity: .8; }
+tr.am-completado > td { background: #d8f2e1 !important; }
+tr.am-ya-tenia > td { background: #fff3c4 !important; }
+tr.am-con-problemas > td, tr.am-no-encontrado > td { background: #f9d4d0 !important; }
+li.am-completado { color: #2f6b4f; }
+li.am-con-problemas, li.am-no-encontrado, li.am-detalle { color: #9b2c1f; }
