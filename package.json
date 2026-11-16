@@ -1,6 +1,6 @@
 {
   "name": "aula-manager-extension",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Extensión de Chrome que completa la carga de notas de SIU-Guaraní (y otras plataformas) con las notas de Aula Manager.",
   "license": "AGPL-3.0-or-later",
@@ -8,7 +8,9 @@
   "scripts": {
     "armar": "node scripts/armar.mjs",
     "revisar": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "empaquetar": "node scripts/empaquetar.mjs",
+    "iconos": "bash scripts/iconos.sh"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.326",

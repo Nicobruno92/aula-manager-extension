@@ -1,0 +1,193 @@
+FICHA PARA LA CHROME WEB STORE
+Aula Manager: pasar notas, versión 0.2.0
+
+Texto para copiar en el panel de desarrollador (https://chrome.google.com/webstore/devconsole).
+Cada bloque dice en qué pestaña y en qué campo va. Las capturas y el mosaico están en
+tienda/capturas/ y se regeneran con tienda/capturas.py.
+
+Este archivo está en un repositorio público: no escribas acá contraseñas ni usuarios de prueba.
+Esos van solamente en el campo del panel.
+
+
+============================================================
+PESTAÑA «FICHA DE PLAN DE CHROME WEB STORE» (Store listing)
+============================================================
+
+NOMBRE (sale del manifiesto, campo "name")
+Aula Manager: pasar notas
+
+RESUMEN (sale del manifiesto, campo "description"; 118 de 132 caracteres)
+Completa la carga de notas de SIU-Guaraní y de las actas del CBC con las notas de Aula Manager. Vos revisás y guardás.
+
+DESCRIPCIÓN
+Si llevás las notas de tu comisión en Aula Manager, esta extensión te ahorra cargarlas a mano, alumno por alumno, en la plataforma de la universidad.
+
+Abrís la pantalla de carga de notas, tocás el ícono de Aula Manager y después «Completar esta página». La extensión llena cada renglón con la nota, la condición y los demás datos del acta, buscando a cada alumno por su DNI. Después revisás y guardás vos, como siempre.
+
+Plataformas:
+• SIU-Guaraní 3, en cualquier universidad: acta de cursada (regularidad y promoción) y mesa de examen.
+• Actas del CBC de la UBA (Gestión de Actas CBC): acta de comisión y acta de libres.
+
+Cómo marca cada renglón:
+• Verde: se completó.
+• Amarillo: ya tenía nota y no se tocó (podés pedir que lo reemplace).
+• Rojo: hay un problema, o ese DNI no estaba entre las notas que mandaste.
+
+Lo que no hace:
+• No guarda, no cierra ni firma el acta, ni aprieta ningún botón de la plataforma. Eso lo seguís haciendo vos.
+• No ve tu usuario ni tu contraseña de la plataforma.
+• No se conecta a ningún servidor ni manda datos a nadie.
+
+Qué datos usa:
+• Desde Aula Manager recibe solo el DNI de cada alumno y los datos del acta (parciales, nota, resultado, condición, fecha). Ningún nombre.
+• Solo acepta notas que vengan de aula-manager.com, cuando tocás «Mandar a la extensión».
+• Las guarda en la memoria del navegador, nunca en el disco, y las borra a las dos horas, al cerrar Chrome o cuando tocás «Borrar las notas guardadas».
+• Entra a la pestaña de la plataforma solo cuando tocás «Usar en esta página». No tiene acceso permanente a ningún sitio.
+
+Hace falta una cuenta de Aula Manager (https://aula-manager.com) con tu comisión y sus notas.
+
+Código abierto con licencia AGPL-3.0: https://github.com/Nicobruno92/aula-manager-extension
+Nace de guarani-chrome, de Facundo Manuel Quiroga (https://github.com/facundoq/guarani-chrome).
+
+CATEGORÍA
+Productividad › Educación (en el panel en inglés: Productivity › Education). Las páginas de
+políticas no listan las categorías: confirmá el nombre exacto en el desplegable del panel.
+
+IDIOMA
+Español (Latinoamérica). Si el panel no lo ofrece, Español.
+
+RECURSOS GRÁFICOS
+Ícono de la tienda: estatico/iconos/icono-128.png (128 × 128, dibujo de 96 × 96 con margen transparente).
+Capturas (1280 × 800), en este orden:
+  1. tienda/capturas/1-cbc-acta-de-comision.png
+  2. tienda/capturas/2-guarani-cursada.png
+  3. tienda/capturas/3-popup.png
+  4. tienda/capturas/4-aviso-de-privacidad.png
+  5. tienda/capturas/5-cbc-acta-de-libres.png
+Mosaico promocional pequeño (440 × 280): tienda/capturas/mosaico-440x280.png
+Mosaico de marquesina (1400 × 560): no hace falta.
+
+URL DE LA PÁGINA PRINCIPAL (Homepage URL)
+https://aula-manager.com
+
+URL DE ASISTENCIA (Support URL)
+https://github.com/Nicobruno92/aula-manager-extension/issues
+
+CONTENIDO PARA ADULTOS
+No.
+
+
+============================================================
+PESTAÑA «PRÁCTICAS DE PRIVACIDAD» (Privacy practices)
+============================================================
+
+PROPÓSITO ÚNICO (Single purpose)
+Completar el formulario de carga de notas de la plataforma universitaria que el docente tiene abierta (SIU-Guaraní o las actas del CBC) con las notas que él mismo mandó desde Aula Manager, para que las revise y las guarde.
+
+  En inglés, por si el revisor lo prefiere:
+  Fill in the grade-entry form of the university platform the teacher has open (SIU-Guaraní or the CBC act system) with the grades the teacher sent from Aula Manager, so the teacher can review and save them.
+
+JUSTIFICACIÓN DE CADA PERMISO
+
+activeTab
+Cuando el docente toca «Usar en esta página» en el popup, la extensión necesita entrar solo a esa pestaña, en ese momento, para mostrar su recuadro y llenar los campos del acta. Con activeTab no pide acceso permanente a ningún sitio: las plataformas de notas cambian de dirección en cada universidad y no hace falta pedir permiso sobre todas.
+  EN: When the teacher clicks «Usar en esta página» in the popup, the extension enters only that tab, at that moment, to show its panel and fill the act's fields. activeTab avoids any permanent host access; grade platforms have a different address at every university.
+
+scripting
+Es la API con la que el popup inyecta el recuadro (pagina.js y pagina.css, incluidos en el paquete) en la pestaña que habilitó activeTab. No se ejecuta código remoto ni texto armado en el momento: solo esos dos archivos del paquete.
+  EN: The popup uses chrome.scripting.executeScript and insertCSS to inject the packaged pagina.js and pagina.css into the tab granted by activeTab. Only those packaged files are injected; no remote or dynamically built code.
+
+storage
+chrome.storage.session guarda las notas que el docente manda desde Aula Manager hasta que las usa (solo en memoria; se borran al cerrar el navegador). chrome.storage.local guarda únicamente la marca de que el docente aceptó el aviso de privacidad, sin ningún dato de alumnos.
+  EN: chrome.storage.session keeps the grades the teacher sends from Aula Manager until they are used (memory only, cleared when the browser closes). chrome.storage.local keeps only the flag that the teacher accepted the privacy notice; no student data.
+
+alarms
+Borra las notas guardadas a las dos horas aunque el docente no vuelva a abrir la extensión. Sin la alarma, las notas quedarían en memoria hasta que se cierre el navegador.
+  EN: Deletes the stored grades two hours after they arrive, even if the teacher never opens the extension again.
+
+Permiso de host por el script de contenido en https://aula-manager.com/*
+El script puente.js corre solo en aula-manager.com para recibir las notas cuando el docente toca «Mandar a la extensión». Es el único sitio del que la extensión acepta notas; el service worker rechaza cualquier otro origen.
+  EN: puente.js runs only on aula-manager.com to receive the grades when the teacher clicks «Mandar a la extensión». It is the only site the extension accepts grades from; the service worker rejects any other origin.
+
+CÓDIGO REMOTO
+No, no uso código remoto (No, I am not using remote code). Todo el código está en el paquete: no carga scripts externos, no usa eval ni new Function, y no se conecta a ningún servidor.
+
+USO DE DATOS: QUÉ DATOS MANEJA
+Tildar:
+• Información de identificación personal (Personally identifiable information): sí. Recibe el DNI de cada alumno, que es un número de identificación emitido por el Estado, y lo usa para encontrar el renglón de ese alumno en el acta.
+• Contenido del sitio web (Website content): sí. Lee la tabla del acta abierta (DNI y lo que ya está cargado en cada renglón) para saber dónde escribir, y escribe la nota y la condición en sus campos. Las notas que recibe de aula-manager.com también son contenido de ese sitio.
+No tildar: información de salud, información financiera y de pago, información de autenticación (no lee contraseñas, usuarios ni cookies), comunicaciones personales, ubicación, historial web, actividad del usuario.
+
+Aunque los datos nunca salen del navegador, el Store pide declararlos igual: la política cuenta como manejo de datos también lo que se procesa o guarda en el dispositivo.
+
+USO DE DATOS: CERTIFICACIONES
+Tildar las tres:
+• No vendo ni transfiero datos de usuarios a terceros, fuera de los casos de uso aprobados.
+  (I do not sell or transfer user data to third parties, outside of the approved use cases.)
+• No uso ni transfiero datos de usuarios para fines que no tengan que ver con el propósito único del elemento.
+  (I do not use or transfer user data for purposes that are unrelated to my item's single purpose.)
+• No uso ni transfiero datos de usuarios para determinar la solvencia crediticia ni para otorgar préstamos.
+  (I do not use or transfer user data to determine creditworthiness or for lending purposes.)
+Las tres son ciertas: la extensión no manda datos a ningún lado, no hay terceros, publicidad ni personas que los lean.
+
+URL DE LA POLÍTICA DE PRIVACIDAD
+https://aula-manager.com/privacidad/#extension
+(Tiene que estar publicada, con la sección de la extensión, antes de mandar a revisión.)
+
+
+============================================================
+PESTAÑA «DISTRIBUCIÓN»
+============================================================
+
+Pago: gratis.
+Visibilidad sugerida: «No listada» (Unlisted) mientras el adaptador del CBC no se confirme con un acta real; se instala con el enlace directo desde Aula Manager. Pasarla a «Pública» después.
+Regiones: todas (la usan docentes en la Argentina, pero restringirla no suma nada).
+
+
+============================================================
+INSTRUCCIONES DE PRUEBA (Test instructions, para el revisor de Google)
+============================================================
+
+Se completan en la pestaña de la cuenta de prueba (Test instructions). Hace falta una cuenta de prueba en Aula Manager con una comisión inventada; el revisor no puede entrar a Guaraní ni a las actas del CBC, así que se le dan páginas de ejemplo con alumnos inventados.
+
+Texto sugerido (en inglés, para el revisor):
+
+This extension fills in the grade-entry form of university platforms (SIU-Guaraní, CBC acts) with grades the teacher sends from Aula Manager. The real platforms require a university login, so please use the sample pages below; all students in them are fictitious.
+
+1. Install the extension. A welcome page opens with the privacy notice: click «Entiendo y acepto» (I understand and accept).
+2. Sign in at https://aula-manager.com with the test account given in the credentials fields. Open the gradebook of the commission «Prueba · Biología», go to «Pasar a:» > «SIU-Guaraní», choose the cursada act and click «Mandar a la extensión» (Send to the extension). The page confirms that the extension received the grades.
+3. Open the sample SIU-Guaraní page: [URL de la página de ejemplo de Guaraní].
+4. Click the Aula Manager icon in the toolbar, then «Usar en esta página» (Use on this page). A green panel appears above the table.
+5. Click «Completar esta página» (Fill this page). Rows turn green (filled), yellow (already had a grade, left untouched) or red (student not in the data sent). The extension never clicks the platform's save or close buttons.
+6. In the popup, «Borrar las notas guardadas» (Delete stored grades) erases the data; it is also erased automatically after two hours or when the browser closes.
+
+The extension makes no network requests. Source code: https://github.com/Nicobruno92/aula-manager-extension
+
+Para que esto funcione hace falta (lo arma Nicolás, no está hecho):
+• Una cuenta de docente de prueba en aula-manager.com con la comisión «Prueba · Biología» y alumnos inventados con los DNI de la página de ejemplo de Guaraní (guarani_cursada.html: 40335123, 41000001 y 41000002, que en la página aparece como CUIT; el cuarto, 39999999, conviene dejarlo afuera para que se vea un renglón rojo). Usuario y contraseña van solo en los campos del panel.
+• Publicar las páginas de ejemplo de pruebas/paginas/ en una dirección pública, por ejemplo activando GitHub Pages en el repositorio (quedarían en https://nicobruno92.github.io/aula-manager-extension/pruebas/paginas/cbc_regulares.html y guarani_cursada.html), y reemplazar las dos [URL …] de arriba.
+• «Mandar a la extensión» para SIU-Guaraní ya está en producción (static/js/extension_notas.js responde en aula-manager.com). Para el CBC, Aula Manager todavía no tiene «Pasar a: Actas del CBC»: cuando esté, sumar al texto el paso equivalente con [URL de la página de ejemplo del CBC] (cbc_regulares.html).
+• Que la política de privacidad tenga la sección de la extensión con el ancla #extension: hoy (2026-11-16) https://aula-manager.com/privacidad/ no menciona la extensión.
+
+
+============================================================
+POLÍTICAS CONSULTADAS (2026-11-16)
+============================================================
+
+Políticas del programa: https://developer.chrome.com/docs/webstore/program-policies/policies
+Uso limitado: https://developer.chrome.com/docs/webstore/program-policies/limited-use
+Requisitos de aviso y consentimiento: https://developer.chrome.com/docs/webstore/program-policies/disclosure-requirements
+Preguntas frecuentes sobre datos de usuarios: https://developer.chrome.com/docs/webstore/program-policies/user-data-faq
+Campos de privacidad del panel: https://developer.chrome.com/docs/webstore/cws-dashboard-privacy
+Campos de la ficha: https://developer.chrome.com/docs/webstore/cws-dashboard-listing
+Buenas prácticas para la ficha: https://developer.chrome.com/docs/webstore/best-listing
+Imágenes (ícono, capturas, mosaicos): https://developer.chrome.com/docs/webstore/images
+
+Lo que sale de ahí y se aplicó:
+• Hace falta política de privacidad aunque los datos queden solo en el dispositivo (User Data FAQ).
+• El DNI cuenta como información de identificación personal: la política incluye «cualquier número de identificación, como uno emitido por el Estado» (User Data FAQ).
+• Aviso destacado y consentimiento antes de usar los datos: la página de bienvenida, que hay que aceptar antes de recibir notas (Disclosure Requirements).
+• Pedir los permisos más acotados posibles (Program Policies, Permissions): activeTab en lugar de acceso a sitios.
+• Sin código remoto ni ofuscación (Program Policies, Manifest V3): el paquete no está minificado, para que el revisor lo lea.
+• Ícono de 128 con dibujo de 96 y 16 px de margen transparente; capturas de 1280 × 800; mosaico chico de 440 × 280 (Images).
+• El texto de las tres certificaciones y los nombres de las categorías de datos no figuran en esas páginas y no pude ver el panel: van como los muestra el panel según lo conocido hasta 2026. Confirmalos al llenarlo y, si cambiaron, tildá el equivalente.

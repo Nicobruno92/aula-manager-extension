@@ -25,6 +25,8 @@ export interface Adaptador {
   // What a field shows before anyone loaded a grade («A» on a CBC act just opened):
   // such a field counts as empty, so it is filled without «Reemplazar».
   vacios?: string[];
+  // The platform's own words for its buttons, for the panel's closing notice (default «Guardar» and «Cerrar y firmar el acta»).
+  botones?: { guardar: string; cerrar: string };
   // Notes about the page itself for the docente (more pages to fill, act not open yet).
   avisos?(documento: Document): string[];
   // Anything the platform needs once fields changed programmatically.

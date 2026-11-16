@@ -156,6 +156,7 @@ describe("panel en Guaraní", () => {
     expect(document.getElementById("renglon_1004")!.classList.contains("am-no-encontrado")).toBe(true);
     expect(document.querySelector<HTMLInputElement>("#js-btn-guardar")!.disabled).toBe(false);
     expect(panel.textContent).toContain("1 completados");
+    expect(panel.textContent).toContain("apretá «Guardar» en la plataforma. «Cerrar y firmar el acta» lo hacés vos.");
   });
 
   test("sin notas cargadas explica cómo mandarlas", async () => {
@@ -199,6 +200,8 @@ describe("panel en el CBC", () => {
     expect(filas[3].classList.contains("am-no-encontrado")).toBe(true);
     expect(document.querySelector<HTMLInputElement>('[name="nota_0"]')!.value).toBe("8");
     expect(clics).toEqual([]);
+    // The closing notice names the CBC's own buttons, not Guaraní's.
+    expect(panel.textContent).toContain("apretá «Grabar Notas» en la plataforma. «Cerrar Acta» lo hacés vos.");
   });
 
   test("en un acta sin abrir avisa antes de completar", async () => {

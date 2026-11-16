@@ -92,6 +92,7 @@ export const cbc: Adaptador = {
   id: "cbc",
   nombre: "Actas del CBC",
   plataforma: "cbc",
+  botones: { guardar: "Grabar Notas", cerrar: "Cerrar Acta" },
   // A CONFIRMAR: an act just opened shows «A» in every grade and «AUS» in Condición.
   vacios: ["a", "aus"],
 

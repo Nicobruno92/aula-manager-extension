@@ -1,9 +1,16 @@
 {
   "manifest_version": 3,
   "name": "Aula Manager: pasar notas",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Completa la carga de notas de SIU-Guaraní y de las actas del CBC con las notas de Aula Manager. Vos revisás y guardás.",
-  "homepage_url": "https://github.com/Nicobruno92/aula-manager-extension",
+  "homepage_url": "https://aula-manager.com",
+  "minimum_chrome_version": "120",
+  "icons": {
+    "16": "iconos/icono-16.png",
+    "32": "iconos/icono-32.png",
+    "48": "iconos/icono-48.png",
+    "128": "iconos/icono-128.png"
+  },
   "permissions": [
     "activeTab",
     "alarms",
@@ -15,7 +22,11 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Pasar notas de Aula Manager"
+    "default_title": "Pasar notas de Aula Manager",
+    "default_icon": {
+      "16": "iconos/icono-16.png",
+      "32": "iconos/icono-32.png"
+    }
   },
   "content_scripts": [
     {

@@ -77,7 +77,8 @@ function panel(adaptador: Adaptador, envio: Envio | null): HTMLElement {
   const lista = elemento("ul");
   const avisosDeLaPagina = elemento("div");
   mostrarAvisos(avisosDeLaPagina, adaptador);
-  const aviso = elemento("p", "Revisá las filas marcadas y apretá «Guardar» en la plataforma. Cerrar y firmar el acta lo hacés vos.", "am-aviso");
+  const botones = adaptador.botones ?? { guardar: "Guardar", cerrar: "Cerrar y firmar el acta" };
+  const aviso = elemento("p", `Revisá las filas marcadas y apretá «${botones.guardar}» en la plataforma. «${botones.cerrar}» lo hacés vos.`, "am-aviso");
   boton.addEventListener("click", () => {
     const resumen = completar(adaptador, document, envio, sobrescribir.checked);
     marcar(resumen);

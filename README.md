@@ -53,7 +53,11 @@ npm install
 npm test          # pruebas con páginas de ejemplo
 npm run revisar   # tipos
 npm run armar     # arma la extensión en dist/
+npm run empaquetar  # arma la versión publicable y la comprime en paquetes/aula-manager-extension-<versión>.zip
+npm run iconos    # regenera estatico/iconos/ desde diseno/ (hace falta rsvg-convert)
 ```
+
+La versión va en `package.json` y en `estatico/manifest.json`, y tienen que coincidir (el armado lo controla). Lo que se carga en la Chrome Web Store está en `tienda/`: la ficha (`ficha.txt`) y las capturas, que se regeneran con `conda run -n base python tienda/capturas.py` después de `npm run armar`.
 
 Para probarla: en `chrome://extensions`, activá el modo de desarrollador, «Cargar descomprimida» y elegí la carpeta `dist/`.
 
