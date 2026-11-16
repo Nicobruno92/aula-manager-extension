@@ -19,7 +19,7 @@ async function mostrar(): Promise<void> {
   borrar.disabled = envio === null;
   estado.textContent = envio
     ? `Tenés las notas de ${envio.comision} (${envio.alumnos.length} alumnos). Abrí la carga de notas y tocá «Usar en esta página».`
-    : "Todavía no hay notas. En Aula Manager abrí el libro de notas, «Pasar a: SIU-Guaraní», y tocá «Mandar a la extensión».";
+    : "Todavía no hay notas. En Aula Manager abrí el libro de notas, «Pasar a:» la plataforma de tu acta, y tocá «Mandar a la extensión».";
 }
 
 completar.onclick = async () => {

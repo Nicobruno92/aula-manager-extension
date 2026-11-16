@@ -5,8 +5,11 @@
 .am-panel label { display: block; margin: 6px 0; }
 .am-boton { padding: 6px 14px; border: 0; border-radius: 8px; background: #2f6b4f; color: #fff; font: inherit; cursor: pointer; }
 .am-aviso { font-size: 12px; opacity: .8; }
-tr.am-completado > td { background: #d8f2e1 !important; }
-tr.am-ya-tenia > td { background: #fff3c4 !important; }
-tr.am-con-problemas > td, tr.am-no-encontrado > td { background: #f9d4d0 !important; }
+.am-alerta { padding: 6px 8px; border-left: 4px solid #b7791f; background: #fff3c4; }
+/* A row is a <tr> (Guaraní, CBC) or a <mat-row> with role="cell" children (Angular Material). */
+tr.am-completado > td, .am-completado > [role="cell"] { background: #d8f2e1 !important; }
+tr.am-ya-tenia > td, .am-ya-tenia > [role="cell"] { background: #fff3c4 !important; }
+tr.am-con-problemas > td, tr.am-no-encontrado > td,
+.am-con-problemas > [role="cell"], .am-no-encontrado > [role="cell"] { background: #f9d4d0 !important; }
 li.am-completado { color: #2f6b4f; }
 li.am-con-problemas, li.am-no-encontrado, li.am-detalle { color: #9b2c1f; }

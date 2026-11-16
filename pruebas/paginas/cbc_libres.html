@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!-- Fake students. The libres act of «Gestión de Actas CBC» as seen in the tutorial video:
+     Apellido y Nombre, DNI and Nota only. The Nota control is a guess until a real act is saved;
+     this one is the <mat-table> flavour (ARIA roles instead of <tr>/<td>). -->
+<html><head><meta charset="utf-8"><title>Gestión de Actas CBC</title></head><body>
+<mat-toolbar class="mat-toolbar"><span>Gestión de Actas CBC</span><span>CÁTEDRA</span></mat-toolbar>
+<aside class="panel-lateral">
+<h2 class="titulo-acta">Examen LIBRE</h2>
+<p><b>Sede</b><br>9-SEDE DE PRUEBA</p><p><b>Materia</b><br>8-BIOLOGIA</p><p><b>Cátedra</b><br>99-PRUEBA</p><p><b>Estado</b><br>Abierta</p>
+<button type="button">Listar Comision</button><button type="button">Grabar Notas (ctrl+G)</button><button type="button">Cerrar Acta</button>
+</aside>
+<mat-table role="table">
+<mat-header-row role="row"><mat-header-cell role="columnheader">Apellido y Nombre</mat-header-cell><mat-header-cell role="columnheader">DNI</mat-header-cell><mat-header-cell role="columnheader">Nota</mat-header-cell></mat-header-row>
+<mat-row role="row"><mat-cell role="cell">PRUEBA, ANA</mat-cell><mat-cell role="cell">41000000</mat-cell><mat-cell role="cell"><input name="nota_0" value="A"></mat-cell></mat-row>
+<mat-row role="row"><mat-cell role="cell">EJEMPLO, BETO</mat-cell><mat-cell role="cell">41000001</mat-cell><mat-cell role="cell"><input name="nota_1" value="A"></mat-cell></mat-row>
+</mat-table>
+<input placeholder="Filtrar por Apellido">
+<mat-paginator><span>Items per page:</span><span class="mat-mdc-paginator-range-label">1 – 2 of 2</span></mat-paginator>
+</body></html>

@@ -52,6 +52,12 @@ function mostrarResumen(lista: HTMLUListElement, resumen: Resumen): void {
   }
 }
 
+// What the platform's page itself needs the docente to know (more pages, act not open).
+// Read again on every click: the docente may have moved to another page of the act.
+function mostrarAvisos(caja: HTMLElement, adaptador: Adaptador): void {
+  caja.replaceChildren(...(adaptador.avisos?.(document) ?? []).map((texto) => elemento("p", texto, "am-alerta")));
+}
+
 function panel(adaptador: Adaptador, envio: Envio | null): HTMLElement {
   const raiz = elemento("div", "", "am-panel");
   raiz.id = ID_DEL_PANEL;
@@ -69,13 +75,16 @@ function panel(adaptador: Adaptador, envio: Envio | null): HTMLElement {
   const boton = elemento("button", "Completar esta página", "am-boton");
   boton.type = "button"; // inside Guaraní's form, a plain button would submit it
   const lista = elemento("ul");
+  const avisosDeLaPagina = elemento("div");
+  mostrarAvisos(avisosDeLaPagina, adaptador);
   const aviso = elemento("p", "Revisá las filas marcadas y apretá «Guardar» en la plataforma. Cerrar y firmar el acta lo hacés vos.", "am-aviso");
   boton.addEventListener("click", () => {
     const resumen = completar(adaptador, document, envio, sobrescribir.checked);
     marcar(resumen);
     mostrarResumen(lista, resumen);
+    mostrarAvisos(avisosDeLaPagina, adaptador);
   });
-  raiz.append(etiqueta, boton, lista, aviso);
+  raiz.append(avisosDeLaPagina, etiqueta, boton, lista, aviso);
   return raiz;
 }
 

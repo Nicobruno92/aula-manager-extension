@@ -22,6 +22,11 @@ export interface Adaptador {
   filas(documento: Document): FilaDePagina[];
   // Where the panel goes: right before this element.
   lugarDelPanel(documento: Document): HTMLElement;
+  // What a field shows before anyone loaded a grade («A» on a CBC act just opened):
+  // such a field counts as empty, so it is filled without «Reemplazar».
+  vacios?: string[];
+  // Notes about the page itself for the docente (more pages to fill, act not open yet).
+  avisos?(documento: Document): string[];
   // Anything the platform needs once fields changed programmatically.
   despuesDeCompletar?(documento: Document): void;
 }

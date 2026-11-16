@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 // The Chrome pieces with a fake «chrome» object: the bridge on Aula Manager, the
-// service worker and the panel injected into Guaraní.
+// service worker and the panel injected into Guaraní and the CBC.
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -168,5 +168,47 @@ describe("panel en Guaraní", () => {
     const panel = await abrirPanel({ ...ENVIO, comision: '<img src=x onerror="alert(1)">' });
     expect(panel.querySelector("img")).toBeNull();
     expect(panel.textContent).toContain("<img");
+  });
+});
+
+describe("panel en el CBC", () => {
+  const CBC: Envio = {
+    version: 1, plataforma: "cbc", comision: "99901 · Biología", generado: "2026-11-16T10:00:00-03:00",
+    alumnos: [{ dni: "41000000", instancias: { regularidad: { condicion: "PROM", nota: "8" } } }],
+  };
+
+  async function abrirPanel(pagina: string, envio: Envio | null) {
+    const html = readFileSync(join(__dirname, "paginas", pagina), "utf-8");
+    document.documentElement.innerHTML = new DOMParser().parseFromString(html, "text/html").documentElement.innerHTML;
+    const { falso } = chromeFalso();
+    falso.runtime.sendMessage.mockResolvedValue({ ok: true, envio });
+    vi.stubGlobal("chrome", falso);
+    await import("../src/pagina");
+    await vi.waitFor(() => expect(document.getElementById("aula-manager-panel")).not.toBeNull());
+    return document.getElementById("aula-manager-panel")!;
+  }
+
+  test("se elige solo, completa y marca sin tocar los botones del acta", async () => {
+    const panel = await abrirPanel("cbc_regulares.html", CBC);
+    expect(panel.textContent).toContain("Actas del CBC");
+    const clics: string[] = [];
+    document.querySelectorAll("#grabar, #cerrar, #listar").forEach((b) => b.addEventListener("click", () => clics.push(b.id)));
+    panel.querySelector<HTMLButtonElement>(".am-boton")!.click();
+    const filas = document.querySelectorAll("tbody tr");
+    expect(filas[0].classList.contains("am-completado")).toBe(true);
+    expect(filas[3].classList.contains("am-no-encontrado")).toBe(true);
+    expect(document.querySelector<HTMLInputElement>('[name="nota_0"]')!.value).toBe("8");
+    expect(clics).toEqual([]);
+  });
+
+  test("en un acta sin abrir avisa antes de completar", async () => {
+    const panel = await abrirPanel("cbc_sin_abrir.html", CBC);
+    expect(panel.querySelector(".am-alerta")!.textContent).toContain("Abrir Acta");
+  });
+
+  test("con notas de Guaraní no completa el acta del CBC", async () => {
+    const panel = await abrirPanel("cbc_regulares.html", ENVIO);
+    expect(panel.querySelector(".am-boton")).toBeNull();
+    expect(panel.textContent).toContain("No hay notas para Actas del CBC");
   });
 });

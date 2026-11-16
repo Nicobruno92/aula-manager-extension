@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- Fake students and commission. Layout of «Gestión de Actas CBC» as seen in the tutorial video
+     (Angular Material: toolbar, side panel, mat-table, paginator). The controls inside the cells
+     are a guess until a real act is saved: inputs for the grades, a native select for Condición. -->
+<html><head><meta charset="utf-8"><title>Gestión de Actas CBC</title></head><body>
+<mat-toolbar class="mat-toolbar"><span>Gestión de Actas CBC</span><span class="spacer"></span><span>CÁTEDRA</span>
+<button type="button" mattooltip="Volver">←</button><button type="button" mattooltip="Salir">⇥</button></mat-toolbar>
+<div class="contenedor">
+<aside class="panel-lateral">
+<h2 class="titulo-acta">Comisión 99901</h2>
+<p><b>Sede</b><br>9-SEDE DE PRUEBA</p><p><b>Materia</b><br>8-BIOLOGIA</p><p><b>Horario</b><br>900-LU JU 7-10</p>
+<p><b>Aula</b><br>100</p><p><b>Cátedra</b><br>99-PRUEBA</p><p><b>Estado</b><br>Abierta</p>
+<button type="button" id="listar">Listar Comision</button>
+<button type="button" id="grabar">Grabar Notas (ctrl+G)</button>
+<button type="button" id="cerrar">Cerrar Acta</button>
+</aside>
+<main>
+<table mat-table class="mat-mdc-table" role="table">
+<thead role="rowgroup"><tr mat-header-row role="row">
+<th mat-header-cell role="columnheader">Apellido y Nombre</th><th mat-header-cell role="columnheader">DNI</th>
+<th mat-header-cell role="columnheader">Primer Parcial</th><th mat-header-cell role="columnheader">Segundo Parcial</th>
+<th mat-header-cell role="columnheader">Cursada</th><th mat-header-cell role="columnheader">Condición</th><th mat-header-cell role="columnheader">Nota</th>
+</tr></thead>
+<tbody role="rowgroup">
+<tr mat-row role="row"><td mat-cell role="cell">PRUEBA, ANA</td><td mat-cell role="cell">41000000</td>
+<td mat-cell role="cell"><input name="p1_0" value="A"></td><td mat-cell role="cell"><input name="p2_0" value="A"></td>
+<td mat-cell role="cell">A</td>
+<td mat-cell role="cell"><select name="cond_0"><option value="P">PROM</option><option value="E">EXA</option><option value="I">INS</option><option value="A" selected>AUS</option></select></td>
+<td mat-cell role="cell"><input name="nota_0" value="A"></td></tr>
+<tr mat-row role="row"><td mat-cell role="cell">EJEMPLO, BETO</td><td mat-cell role="cell">41000001</td>
+<td mat-cell role="cell"><input name="p1_1" value=""></td><td mat-cell role="cell"><input name="p2_1" value=""></td>
+<td mat-cell role="cell"></td>
+<td mat-cell role="cell"><select name="cond_1"><option value="">-</option><option value="P">PROM</option><option value="E">EXA</option><option value="I">INS</option><option value="A">AUS</option></select></td>
+<td mat-cell role="cell"><input name="nota_1" value=""></td></tr>
+<tr mat-row role="row"><td mat-cell role="cell">INVENTADA, CLARA</td><td mat-cell role="cell">41000002</td>
+<td mat-cell role="cell"><input name="p1_2" value="7"></td><td mat-cell role="cell"><input name="p2_2" value="5"></td>
+<td mat-cell role="cell">6</td>
+<td mat-cell role="cell"><select name="cond_2"><option value="P">PROM</option><option value="E" selected>EXA</option><option value="I">INS</option><option value="A">AUS</option></select></td>
+<td mat-cell role="cell"><input name="nota_2" value="6"></td></tr>
+<tr mat-row role="row"><td mat-cell role="cell">FICTICIO, DARIO</td><td mat-cell role="cell">41000003</td>
+<td mat-cell role="cell"><input name="p1_3" value="A"></td><td mat-cell role="cell"><input name="p2_3" value="A"></td>
+<td mat-cell role="cell">A</td>
+<td mat-cell role="cell"><select name="cond_3"><option value="P">PROM</option><option value="E">EXA</option><option value="I">INS</option><option value="A" selected>AUS</option></select></td>
+<td mat-cell role="cell"><input name="nota_3" value="A"></td></tr>
+</tbody></table>
+<div class="filtro"><input placeholder="Filtrar por Apellido"></div>
+<mat-paginator><span>Items per page:</span><select aria-label="Items per page"><option>10</option><option>25</option><option>100</option></select>
+<span class="mat-mdc-paginator-range-label">1 – 4 of 4</span></mat-paginator>
+</main></div></body></html>

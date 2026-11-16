@@ -28,7 +28,7 @@ export interface Envio {
 const SOLO_DIGITOS = /^\d{7,11}$/;
 const INSTANCIAS: Instancia[] = ["regularidad", "promocion", "examen"];
 // Act fields any adapter may fill; anything else in a page's envío is dropped, never stored.
-export const CAMPOS_CONOCIDOS = ["fecha", "nota", "resultado", "condicion", "observacion"];
+export const CAMPOS_CONOCIDOS = ["fecha", "primer_parcial", "segundo_parcial", "nota", "resultado", "condicion", "observacion"];
 
 function leerCampos(datos: unknown): Campos {
   const campos: Campos = {};
