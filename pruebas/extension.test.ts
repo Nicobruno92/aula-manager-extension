@@ -8,7 +8,7 @@ import type { Envio } from "../src/envio";
 
 const ENVIO: Envio = {
   version: 1, plataforma: "guarani", comision: "70802 · Biología", generado: "2026-11-05T10:00:00-03:00",
-  alumnos: [{ dni: "40335123", instancias: { regularidad: { fecha: "12/12/2026", resultado: "Aprobado", condicion: "Regular" } } }],
+  alumnos: [{ dni: "41000000", instancias: { regularidad: { fecha: "12/12/2026", resultado: "Aprobado", condicion: "Regular" } } }],
 };
 
 type Oyente = (pedido: any, remitente: any, responder: (r: unknown) => void) => boolean;
@@ -91,10 +91,10 @@ describe("fondo", () => {
     const { falso, pedir } = chromeFalso();
     vi.stubGlobal("chrome", falso);
     await import("../src/fondo");
-    const conDeMas = { ...ENVIO, extra: "x", alumnos: [{ dni: "40335123", nombre: "Ana Pérez", instancias: { regularidad: { condicion: "Regular", mail: "ana@x" }, otra: { a: "b" } } }] };
+    const conDeMas = { ...ENVIO, extra: "x", alumnos: [{ dni: "41000000", nombre: "Ana Pérez", instancias: { regularidad: { condicion: "Regular", mail: "ana@x" }, otra: { a: "b" } } }] };
     await pedir({ tipo: "guardar", envio: conDeMas }, "https://aula-manager.com");
     const { envio } = (await pedir({ tipo: "leer" }, "https://aula-manager.com")) as { envio: Envio };
-    expect(envio).toEqual({ ...ENVIO, alumnos: [{ dni: "40335123", instancias: { regularidad: { condicion: "Regular" } } }] });
+    expect(envio).toEqual({ ...ENVIO, alumnos: [{ dni: "41000000", instancias: { regularidad: { condicion: "Regular" } } }] });
   });
 
   test("a las dos horas la alarma lo borra", async () => {

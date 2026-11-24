@@ -73,7 +73,7 @@ ENVIO_CBC_LIBRES = {
 ENVIO_GUARANI = {
     "version": 1, "plataforma": "guarani", "comision": "70802 · Biología", "generado": GENERADO,
     "alumnos": [
-        {"dni": "40335123", "instancias": {"regularidad": {"fecha": "12/12/2026", "resultado": "Aprobado", "condicion": "Promociono"}}},
+        {"dni": "41000000", "instancias": {"regularidad": {"fecha": "12/12/2026", "resultado": "Aprobado", "condicion": "Promociono"}}},
         {"dni": "41000001", "instancias": {"regularidad": {"fecha": "12/12/2026", "resultado": "Reprobado", "condicion": "Libre"}}},
         {"dni": "41000002", "instancias": {"regularidad": {"fecha": "12/12/2026", "resultado": "Aprobado", "condicion": "Regular"}}},
     ],

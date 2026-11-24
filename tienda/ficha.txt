@@ -148,26 +148,32 @@ Regiones: todas (la usan docentes en la Argentina, pero restringirla no suma nad
 INSTRUCCIONES DE PRUEBA (Test instructions, para el revisor de Google)
 ============================================================
 
-Se completan en la pestaña de la cuenta de prueba (Test instructions). Hace falta una cuenta de prueba en Aula Manager con una comisión inventada; el revisor no puede entrar a Guaraní ni a las actas del CBC, así que se le dan páginas de ejemplo con alumnos inventados.
+Van en la pestaña de la cuenta de prueba (Test instructions). No hace falta cuenta: los campos de usuario y contraseña quedan vacíos. El revisor no puede entrar a Aula Manager (el segundo factor es un código por mail), a Guaraní ni a las actas del CBC. Por eso Aula Manager tiene una página pública, sin login, que le manda a la extensión notas de ejemplo fijas, y dos páginas de ejemplo con alumnos inventados y los mismos DNI (41000000 a 41000003 y 39999999).
 
-Texto sugerido (en inglés, para el revisor):
+URLs:
+• Página de prueba: https://aula-manager.com/extension/prueba/
+• Página de ejemplo de SIU-Guaraní: https://aula-manager.com/static/extension-prueba/guarani_cursada.html
+• Página de ejemplo de las actas del CBC: https://aula-manager.com/static/extension-prueba/cbc_regulares.html
 
-This extension fills in the grade-entry form of university platforms (SIU-Guaraní, CBC acts) with grades the teacher sends from Aula Manager. The real platforms require a university login, so please use the sample pages below; all students in them are fictitious.
+Texto para pegar (en inglés, para el revisor):
+
+No account is needed. The real platforms (SIU-Guaraní, the CBC act system) and Aula Manager itself require a university or two-factor login, so we published a public test page and two sample pages with fictitious students:
+- Test page: https://aula-manager.com/extension/prueba/
+- Sample SIU-Guaraní page: https://aula-manager.com/static/extension-prueba/guarani_cursada.html
+- Sample CBC act page: https://aula-manager.com/static/extension-prueba/cbc_regulares.html
 
 1. Install the extension. A welcome page opens with the privacy notice: click «Entiendo y acepto» (I understand and accept).
-2. Sign in at https://aula-manager.com with the test account given in the credentials fields. Open the gradebook of the commission «Prueba · Biología», go to «Pasar a:» > «SIU-Guaraní», choose the cursada act and click «Mandar a la extensión» (Send to the extension). The page confirms that the extension received the grades.
-3. Open the sample SIU-Guaraní page: [URL de la página de ejemplo de Guaraní].
-4. Click the Aula Manager icon in the toolbar, then «Usar en esta página» (Use on this page). A green panel appears above the table.
-5. Click «Completar esta página» (Fill this page). Rows turn green (filled), yellow (already had a grade, left untouched) or red (student not in the data sent). The extension never clicks the platform's save or close buttons.
-6. In the popup, «Borrar las notas guardadas» (Delete stored grades) erases the data; it is also erased automatically after two hours or when the browser closes.
+2. Open the test page and click «Mandar notas de ejemplo para Guaraní» (Send sample grades for Guaraní). The page confirms that the extension received the grades of 3 students.
+3. Open the sample SIU-Guaraní page. Click the Aula Manager icon in the toolbar, then «Usar en esta página» (Use on this page). A panel appears above the table.
+4. Click «Completar esta página» (Fill this page). Rows turn green (filled), yellow (already had a grade, left untouched) or red (that student was left out of the sample grades on purpose). The extension never clicks the page's save button.
+5. Back on the test page, click «Mandar notas de ejemplo para el CBC» (Send sample grades for the CBC) and repeat steps 3 and 4 on the sample CBC act page. The new grades replace the previous ones.
+6. In the popup, «Borrar las notas guardadas» (Delete stored grades) erases them; they are also erased after two hours or when the browser closes.
 
-The extension makes no network requests. Source code: https://github.com/Nicobruno92/aula-manager-extension
+The extension makes no network requests: the grades go from the aula-manager.com page to the extension through its content script (puente.js) and stay in chrome.storage.session. Source code: https://github.com/Nicobruno92/aula-manager-extension
 
-Para que esto funcione hace falta (lo arma Nicolás, no está hecho):
-• Una cuenta de docente de prueba en aula-manager.com con la comisión «Prueba · Biología» y alumnos inventados con los DNI de la página de ejemplo de Guaraní (guarani_cursada.html: 40335123, 41000001 y 41000002, que en la página aparece como CUIT; el cuarto, 39999999, conviene dejarlo afuera para que se vea un renglón rojo). Usuario y contraseña van solo en los campos del panel.
-• Publicar las páginas de ejemplo de pruebas/paginas/ en una dirección pública, por ejemplo activando GitHub Pages en el repositorio (quedarían en https://nicobruno92.github.io/aula-manager-extension/pruebas/paginas/cbc_regulares.html y guarani_cursada.html), y reemplazar las dos [URL …] de arriba.
-• «Mandar a la extensión» para SIU-Guaraní ya está en producción (static/js/extension_notas.js responde en aula-manager.com). Para el CBC, Aula Manager todavía no tiene «Pasar a: Actas del CBC»: cuando esté, sumar al texto el paso equivalente con [URL de la página de ejemplo del CBC] (cbc_regulares.html).
-• Que la política de privacidad tenga la sección de la extensión con el ancla #extension: hoy (2026-11-16) https://aula-manager.com/privacidad/ no menciona la extensión.
+Antes de mandar a revisión:
+• Las tres URLs tienen que responder en producción (en Aula Manager: modulos/calificaciones/extension_prueba.py, config/extension_prueba.yaml y static/extension-prueba/). Las páginas de ejemplo son copias de pruebas/paginas/ con un cartel arriba («Página de ejemplo con alumnos inventados…»); si cambian acá, copiarlas de nuevo con el cartel y los mismos DNI.
+• Las filas esperadas: en Guaraní, verde, amarillo, verde (el alumno con CUIT) y rojo; en el CBC, verde, verde, amarillo y rojo.
 
 
 ============================================================

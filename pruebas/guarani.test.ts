@@ -19,7 +19,7 @@ function valor(documento: Document, nombre: string): string {
 const CURSADA: Envio = {
   version: 1, plataforma: "guarani", comision: "70802 · Biología", generado: "2026-11-05T10:00:00-03:00",
   alumnos: [
-    { dni: "40335123", instancias: { regularidad: { fecha: "12/12/2026", resultado: "Aprobado", condicion: "Promociono" } } },
+    { dni: "41000000", instancias: { regularidad: { fecha: "12/12/2026", resultado: "Aprobado", condicion: "Promociono" } } },
     { dni: "41000001", instancias: { regularidad: { fecha: "12/12/2026", resultado: "Reprobado", condicion: "Libre" } } },
     { dni: "41000002", instancias: { regularidad: { fecha: "12/12/2026", resultado: "Aprobado", condicion: "Regular" } } },
   ],
@@ -38,7 +38,7 @@ describe("reconocer la página", () => {
   test("cada fila sabe de qué alumno y qué acta es", () => {
     const filas = guarani.filas(abrir("guarani_promocion.html"));
     expect(filas.map((f) => [f.documento, f.instancia])).toEqual([
-      ["40335123", "regularidad"], ["40335123", "promocion"], ["41000001", "regularidad"], ["41000001", "promocion"],
+      ["41000000", "regularidad"], ["41000000", "promocion"], ["41000001", "regularidad"], ["41000001", "promocion"],
     ]);
   });
 });
@@ -87,7 +87,7 @@ describe("completar la cursada", () => {
 
   test("un valor que no está entre las opciones deja la fila entera sin tocar", () => {
     const documento = abrir("guarani_cursada.html");
-    const envio = { ...CURSADA, alumnos: [{ dni: "40335123", instancias: { regularidad: { fecha: "12/12/2026", condicion: "Aprobadísimo" } } }] };
+    const envio = { ...CURSADA, alumnos: [{ dni: "41000000", instancias: { regularidad: { fecha: "12/12/2026", condicion: "Aprobadísimo" } } }] };
     const resumen = completar(guarani, documento, envio, false);
     expect(resumen.filas[0].estado).toBe("con_problemas");
     expect(resumen.filas[0].problemas).toEqual(["«Aprobadísimo» no es una opción de condicion"]);
@@ -97,7 +97,7 @@ describe("completar la cursada", () => {
 
   test("la promoción va en su propia fila y un campo bloqueado se saltea con aviso", () => {
     const documento = abrir("guarani_promocion.html");
-    const envio: Envio = { ...CURSADA, alumnos: [{ dni: "40335123", instancias: {
+    const envio: Envio = { ...CURSADA, alumnos: [{ dni: "41000000", instancias: {
       regularidad: { nota: "8", condicion: "Promociono" },
       promocion: { fecha: "12/12/2026", nota: "8", resultado: "Promocionado" },
     } }] };
@@ -114,7 +114,7 @@ describe("completar una mesa de examen", () => {
   test("carga nota, fecha y resultado", () => {
     const documento = abrir("guarani_mesa.html");
     const envio: Envio = { ...CURSADA, alumnos: [
-      { dni: "40335123", instancias: { examen: { fecha: "12/12/2026", nota: "7", resultado: "Aprobado" } } },
+      { dni: "41000000", instancias: { examen: { fecha: "12/12/2026", nota: "7", resultado: "Aprobado" } } },
     ] };
     const resumen = completar(guarani, documento, envio, false);
     expect(valor(documento, "renglones[4001][nota]")).toBe("7");

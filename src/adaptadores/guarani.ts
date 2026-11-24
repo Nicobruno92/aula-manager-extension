@@ -26,7 +26,7 @@ function instanciaDe(fila: HTMLElement, esMesa: boolean): Instancia | null {
   return null;
 }
 
-// "DNI 40335123" → "40335123"; a CUIT stays whole (completar.ts matches it with the DNI inside).
+// "DNI 41000000" → "41000000"; a CUIT stays whole (completar.ts matches it with the DNI inside).
 function documentoDe(fila: HTMLElement): string | null {
   const identificacion = fila.querySelector<HTMLElement>(".identificacion");
   return identificacion ? (identificacion.textContent ?? "").replace(/\D/g, "") : null;
